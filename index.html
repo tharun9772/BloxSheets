@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BloxSheets</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #080e1b;
+    color: white;
+    min-height: 100vh;
+}
+
+header {
+    background: #071d40;
+    border-bottom: 1px solid #164b91;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    box-shadow: 0 4px 20px #00000030;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.logo span {
+    color: #49a5ff;
+}
+
+.header-label {
+    color: #9bbce5;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+main {
+    max-width: 1450px;
+    margin: auto;
+    padding: 45px 7%;
+}
+
+.hero {
+    margin-bottom: 35px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 12px;
+}
+
+.hero h1 span {
+    color: #3999ff;
+}
+
+.hero p {
+    color: #91a6c3;
+    line-height: 1.6;
+}
+
+.search-container {
+    margin: 25px 0 35px;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 16px 20px;
+    background: #101e33;
+    border: 1px solid #23446d;
+    border-radius: 10px;
+    outline: none;
+    color: white;
+    font-size: 15px;
+    transition: .2s;
+}
+
+.search-container input:focus {
+    border-color: #3999ff;
+    box-shadow: 0 0 12px #1685ff30;
+}
+
+.search-container input::placeholder {
+    color: #7189a8;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    gap: 12px;
+}
+
+.section-heading h2 {
+    font-size: 21px;
+}
+
+#sheetCount {
+    color: #7ea7d6;
+    font-size: 13px;
+}
+
+.library {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 22px;
+}
+
+.sheet {
+    background: #101c30;
+    border: 1px solid #1d385b;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    transition: .25s;
+}
+
+.sheet:hover {
+    transform: translateY(-5px);
+    border-color: #3999ff;
+    box-shadow: 0 8px 25px #087cff20;
+}
+
+.sheet img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    background: #172944;
+}
+
+.sheet-info {
+    padding: 15px;
+}
+
+.sheet-info h3 {
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.sheet-info p {
+    font-size: 12px;
+    color: #829cbd;
+    line-height: 1.5;
+}
+
+.view-label {
+    display: inline-block;
+    margin-top: 13px;
+    background: #123e70;
+    color: #80c1ff;
+    border-radius: 5px;
+    padding: 7px 11px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.empty,
+.status {
+    text-align: center;
+    color: #8ba6c9;
+    padding: 50px 10px;
+    grid-column: 1 / -1;
+}
+
+.empty {
+    display: none;
+}
+
+footer {
+    border-top: 1px solid #17345c;
+    padding: 25px;
+    text-align: center;
+    color: #7189a8;
+    font-size: 13px;
+    margin-top: 60px;
+}
+
+@media(max-width: 600px) {
+    main {
+        padding: 35px 5%;
+    }
+
+    .hero h1 {
+        font-size: 29px;
+    }
+
+    .library {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 13px;
+    }
+
+    .sheet img {
+        height: 145px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Blox<span>Sheets</span></div>
+    <div class="header-label">Colo(u)ring Sheets</div>
+</header>
+
+<main>
+
+    <section class="hero">
+        <h1>Explore A4 Paper <span>Colo(u)ring Sheets!</span></h1>
+        <p>
+            Discover sheets, explore your creativity,
+            and find something new to color!
+        </p>
+    </section>
+
+    <div class="search-container">
+        <input
+            type="text"
+            id="search"
+            placeholder="Search coloring sheets..."
+            autocomplete="off"
+        >
+    </div>
+
+    <div class="section-heading">
+        <h2>All Coloring Sheets</h2>
+        <span id="sheetCount">Loading...</span>
+    </div>
+
+    <div class="library" id="library">
+        <div class="status" id="status">
+            Loading coloring sheets...
+        </div>
+
+        <div class="empty" id="empty">
+            No coloring sheets found.
+        </div>
+    </div>
+
+</main>
+
+<footer>
+    Join The Discord For More! <a style="color: white" href="https://discord.gg/sqPFYEsz8F">https://discord.gg/sqPFYEsz8F</a>
+</footer>
+
+<script>
+const library = document.getElementById("library");
+const search = document.getElementById("search");
+const count = document.getElementById("sheetCount");
+const empty = document.getElementById("empty");
+const status = document.getElementById("status");
+
+let sheets = [];
+
+async function loadSheets() {
+    try {
+        const response = await fetch("assets/pages.json");
+
+        if (!response.ok) {
+            throw new Error("Could not load assets/pages.json");
+        }
+
+        const data = await response.json();
+
+        if (!Array.isArray(data)) {
+            throw new Error("The JSON must contain an array.");
+        }
+
+        sheets = data;
+        status.style.display = "none";
+
+        displaySheets();
+
+    } catch (error) {
+        console.error(error);
+        status.textContent = "Failed to load coloring sheets.";
+        count.textContent = "0 Sheets";
+    }
+}
+
+function displaySheets(filter = "") {
+    library.querySelectorAll(".sheet").forEach(card => {
+        card.remove();
+    });
+
+    const filtered = sheets.filter(sheet => {
+        const title = (sheet.title || "").toLowerCase();
+        const description = (sheet.description || "").toLowerCase();
+        const query = filter.toLowerCase();
+
+        return title.includes(query) || description.includes(query);
+    });
+
+    count.textContent = `${filtered.length} Sheets`;
+    empty.style.display = filtered.length ? "none" : "block";
+
+    filtered.forEach(sheet => {
+        const card = document.createElement("a");
+
+        card.className = "sheet";
+        card.href = sheet.pdf || "#";
+        card.target = "_blank";
+        card.rel = "noopener noreferrer";
+
+        const img = document.createElement("img");
+        img.src = sheet.image || "images/image1.png";
+        img.alt = sheet.title || "Coloring Sheet";
+        img.loading = "lazy";
+
+        const info = document.createElement("div");
+        info.className = "sheet-info";
+
+        const title = document.createElement("h3");
+        title.textContent = sheet.title || "Untitled Coloring Sheet";
+
+        const description = document.createElement("p");
+        description.textContent = sheet.description || "No description available.";
+
+        const label = document.createElement("span");
+        label.className = "view-label";
+        label.textContent = "View Sheet →";
+
+        info.append(title, description, label);
+        card.append(img, info);
+
+        library.appendChild(card);
+    });
+}
+
+search.addEventListener("input", () => {
+    displaySheets(search.value);
+});
+
+loadSheets();
+</script>
+
+</body>
+</html>
