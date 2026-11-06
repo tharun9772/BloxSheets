@@ -1,7 +1,7 @@
 [
   {
     "title": "Bloxcraft UBG Logo",
-    "image": "assets/img/color me-1.png",
+    "image": "assets/img/1.png",
     "pdf": "assets/pages/1.pdf",
     "description": "Original Bloxcraft UBG Logo"
   },
@@ -10,5 +10,17 @@
     "image": "assets/img/2.png",
     "pdf": "assets/pages/2.pdf",
     "description": "The New Logo Of Tharun9772 On Discord!"
+  },
+  {
+    "title": "DK The 'Watermelon Guy'",
+    "image": "assets/img/3.png",
+    "pdf": "assets/pages/3.pdf",
+    "description": "DK's Logo"
+  },
+  {
+    "title": "Bloxcraft Studios Banner",
+    "image": "assets/img/3.png",
+    "pdf": "assets/pages32.pdf",
+    "description": "The Banner And Discord Banner Of Bloxcraft STudios (Not Youtube Banner)!"
   }
 ]
